@@ -52,19 +52,6 @@ __NOTE__: photoautotroph has been specified with Green color and methanotroph wi
       - Gas area and concentrations using Gas Chromatography (GC) for -Oxygen (O2) -Methane (CH4) -Carbon dioxide (CO2)
 
 
-![warning-icon](https://img.icons8.com/emoji/48/000000/warning-emoji.png)
-__WARNING__: do not change the names of the fields/columns in the input table 
-containing species records! These are fixed or "hard-coded" and will make the analysis fail 
-if modified. If you have a previous table with input x,y records do not forget to adjust the 
-header according to these names.
-
-
-![warning-icon](https://img.icons8.com/emoji/48/000000/warning-emoji.png)
-__WARNING__: do not change the name of these sub-folders as this will be prevent the 
-analysis from working properly. Exception of course for subfolder(s) name(s) inside 
-_PredictorVariables/Future_.
-
-
 # 3. Code folder structure
 
 - User can produce all figures available in the paper: 
@@ -85,8 +72,8 @@ _PredictorVariables/Future_.
    |_WithoutSelfShad_                  |A code for investigating the absence of self-shading effect     |
    |_functionWO_                  |the function used with _WithoutSelfShad_ file     |
    
-   
-
+![warning-icon](https://img.icons8.com/emoji/48/000000/warning-emoji.png)
+__WARNING__: Function file needs to be downloaded to run the codes at different conditions.
 
 
 ## 3.1. How to read the codes
@@ -94,26 +81,12 @@ _PredictorVariables/Future_.
 
  ![image](https://user-images.githubusercontent.com/67964457/122436706-a827fb00-cf5e-11eb-9c9e-f56282463082.png)
 
-### 3.1.1. Inputs
 
-Three main inputs are required to run the __SDMcalibrationForecasting-v1.R__ script:
+- The structure of the codes has been shown in the following subsections:
 
-(i) A set of modeling outputs placed in the OUTPUTS/MODS folder and  generated
-By the SDMcalibrationForecasting-v1.R script.
+### 3.1.1. Experimental data
 
-(ii) Total Annual productivity data (either single or multi-year) by region of interest
-formatted as a csv table placed in the DATA/productivityData folder. This table should
-contain the following fields/columns:
-    (a) region names
-    (b) region unique ID codes (in integer values)
-    (c) year
-    (d) annual production
-
-(iii) A GeoTIFF Raster file with region data. Each region is identified by an
-integer value, the same used as the unique ID in the Total Annual productivity
-table. This is necessary to enable joining the data across these sources. To
-enable area calculations this should be in a projected coordinate system or  (check
-below PROJ_RASTER_DATA and PROJ_COORD_SYSTEM parameter).
+each code has been started with the experimental section, which is copied from analyzed experimental data (__Exp.Data__).
 
 ![warning-icon](https://img.icons8.com/emoji/48/000000/warning-emoji.png)
 __WARNING__: If you wish to use your own data start by cleaning each one of the variables in _Experimental data_ section in the code: 
