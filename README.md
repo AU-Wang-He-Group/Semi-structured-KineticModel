@@ -147,6 +147,8 @@ Model outputs will be genrated in different plots such as
  (iii) Change in Gas Phase
  
  etc. further explanation about the used variable are provided inside the codes.
+ 
+ - Matlab figures of some conditions has been provided in the _output_ folder.
 
 
 # 4. Contacts
