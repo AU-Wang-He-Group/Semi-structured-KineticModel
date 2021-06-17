@@ -76,7 +76,7 @@ __NOTE__: photoautotroph has been specified with Green color and methanotroph wi
 __WARNING__: Function file needs to be downloaded to run the codes at different conditions.
 
 
-## 3.1. How to read the codes
+## 3.1. How to read the codes (preparation)
 - Flowchart of semi-structure modeling of the M-P coculture: 
 
  ![image](https://user-images.githubusercontent.com/67964457/122436706-a827fb00-cf5e-11eb-9c9e-f56282463082.png)
@@ -93,167 +93,47 @@ __WARNING__: If you wish to use your own data start by cleaning each one of the 
 Further explanation about -Name- of each variable has been provided inside the codes.
 
 
-### 3.1.2. Parameters for running
+### 3.1.2. Parameters
 
-_PRODUCTIVITY_TABLE_NAME_
-Annual productivity table as a CSV file
+_Insert Gas composition_
+initial percentage of each gas component in the system
 
-_RESP_VAR_FIELD_NAME_
-Name of the field/column with annual/multi-annual productivity data. 
-This column should be inside the table located in the DATA/ProductivityData folder
+_Insert light intensity_
+light intensity needs to be entered for photoautotroph growth based on (umol photon/m2/s)
 
-_REGION_ID_FIELD_NAME_
-Name of the field that contains the region unique identifier code 
-(an ineteger values). This code must be the same used in the region raster 
-file inside the DATA/Regions folder.
+_Insert volume of liquid and gas phase (L)_
+volume of liquid and gas phase on the bioreactor
 
-_REGION_NAME_FIELD_NAME_
-Field/column name containing the region names
+_photoautotroph Yields_
+needed for calculating amount of biomass and _in situ_ gas consumption production rate
 
-_IS_MULTI_YEAR_
-Is productivity data multi-annual? If TRUE the annual data will be firstly 
-aggregated using the average and then used as input for regression with SDM 
-suitable area as predictor
+_methanotroph yields_
+needed for calculating amount of biomass and _in situ_ gas consumption production rate
 
-_YEAR_FIELD_NAME_
-Name of the field/column with the reference year. 
+_Monod parameters_
+for calculation of the species growth rate 
 
-_SDM_RST_BAND_INDEX_
-Raster band index to use from each species binary SDM. This represents
-which combination of ensemble measure / threshold metric is used to construct
-the species/variey raster stack. The file has a total of 9 bands which represent the
-two-factor combination of: (1) average ensemble, (2) median ensemble, and (3)
-the weighted average ensemble vs. (A) TSS threshold, (B) ROC threshold and, (C)
-Kappa threshold. The 9 bands are in the following order: 1A, 1B, 1C, 2A, 2B, 2C,
-3A, 3B, 3C.
+_time(hours)_
+all sample points in the experiment. to give the running time.
 
-_COORD_SYSTEM_
-Coordinate system of the data (must be the same for species records and
-predictor variables in raster format). The projection name is a PROJ4-like string.
-The default is set to WGS 1984 geographic coordinate system
-Set as NULL if not needed or if data already has a defined coordinate system.
+### 3.1.3. Initialization 
 
-_PROJ_RASTER_DATA_
-Set this to  TRUE if the raster data needs to be re-projected to a different
-coordinate reference system as to allow area calculations. This may be required if
-the original data is in a geographic coordinate system.
-Set to FALSE if data does not require a re-projection to a projected system.
+_Insert initial individual biomass (inoculation)_
+concentration of each species in the system (gDCW/L)
 
-_PROJ_COORD_SYSTEM_
-A CRS PROJ4 string that will be used to re-project the raster input data.
+_Insert total dissoved inorganic carbon in the liquid (mmol/L)(if any)_
+amount of bicarbonate or carbonate salt in the medium
 
-_RST_SPATIAL_RES_
-Spatial resolution (pixel size) to attribute to the re-projected raster 
-(usually in meters)
-
-_VERBOSE_
-Print progress messages? If TRUE messages and progress bars will be displayed.
+_Henry's constant (M/atm)_
+of all gases used in the system
 
 
-### 3.1.3. Outputs 
+## 3.2. Solution of the ODE equations
 
-Outputs from biomod2 will be placed onto _OUTPUTS/MODS_. Inside this, one directory for 
-each modelled species/variety will appear. Inside each species folder, projection results 
-will appear in directories labelled with a _proj__ prefix where spatial results can be cheched 
-more easily in any GIS software (or R) using results in the _GeoTIFF_ subfolder. 
+The codes use each time steps to solve the equations.
+- you need to define the time steps in this section.
 
-Each calibrated model object are located in the _models_ subfolder. Do not change nor delete this 
-folder as this will make recovering or reusing modelling objects impossible.
-
-Model evaluation scores are displayed in csv files with the suffixes:
-
--  _evalDF_KAPPA.csv_: Kappa scores for partial models
--  _evalDF_TSS.csv_: TSS scores for partial models
--  _evalDF_ROC.csv_: ROC scores for partial models
-- _EnsMod_evalDF_AllMetrics.csv_: final scores for the ensemble model containing 
-TSS, ROC and Kappa metrics as well as the threshold applied to "binarize" models, 
-along with sensitivity and specificity values.
-
-Variable importance score are displayed in a csv folder with suffix _varImportance.csv_
-
-
-## 3.2. Fitting the log-log productivity model
-
-### 3.2.1. Inputs
-
-Three main inputs are required to run this script:
-
-(i) A set of modeling outputs placed in the OUTPUTS/MODS folder and  generated
-By the SDMcalibrationForecasting-v1.R script.
-
-(ii) Total Annual productivity data (either single or multi-year) by region of interest
-formatted as a csv table placed in the DATA/productivityData folder. This table should
-contain the following fields/columns:
-    (a) region names
-    (b) region unique ID codes (in integer values)
-    (c) year
-    (d) annual production
-
-(iii) A GeoTIFF Raster file with region data. Each region is identified by an
-integer value, the same used as the unique ID in the Total Annual productivity
-table. This is necessary to enable joining the data across these sources. To
-enable area calculations this should be in a projected coordinate system or  (check
-below PROJ_RASTER_DATA and PROJ_COORD_SYSTEM parameter).
-
-
-### 3.2.2. Parameters for running
-
-_PRODUCTIVITY_TABLE_NAME_
-Annual productivity table as a CSV file
-
-_RESP_VAR_FIELD_NAME_
-Name of the field/column with annual/multi-annual productivity data.
-This column should be inside the table located in the DATA/ProductivityData folder
-
-_REGION_ID_FIELD_NAME_
-Name of the field that contains the region unique identifier code
-(an ineteger values). This code must be the same used in the region raster
-file inside the DATA/Regions folder.
-
-_REGION_NAME_FIELD_NAME_
-Field/column name containing the region names
-
-_IS_MULTI_YEAR_
-Is productivity data multi-annual? If TRUE the annual data will be firstly
-aggregated using the average and then used as input for regression with SDM
-suitable area as predictor
-
-_YEAR_FIELD_NAME_
-Name of the field/column with the reference year.
-
-_SDM_RST_BAND_INDEX_
-Raster band index to use from each species binary SDM. This represents
-which combination of ensemble measure / threshold metric is used to construct
-the species/variey raster stack. The file has a total of 9 bands which represent the
-two-factor combination of: (1) average ensemble, (2) median ensemble, and (3)
-the weighted average ensemble vs. (A) TSS threshold, (B) ROC threshold and, (C)
-Kappa threshold. The 9 bands are in the following order: 1A, 1B, 1C, 2A, 2B, 2C,
-3A, 3B, 3C.
-
-_COORD_SYSTEM_
-Coordinate system of the data (must be the same for species records and
-predictor variables in raster format). The projection name is a PROJ4-like string.
-The default is set to WGS 1984 geographic coordinate system
-Set as NULL if not needed or if data already has a defined coordinate system.
-
-_PROJ_RASTER_DATA_
-Set this to  TRUE if the raster data needs to be re-projected to a different
-coordinate reference system as to allow area calculations. This may be required if
-the original data is in a geographic coordinate system.
-Set to FALSE if data does not require a re-projection to a projected system.
-
-_PROJ_COORD_SYSTEM_
-A CRS PROJ4 string that will be used to re-project the raster input data.
-
-_RST_SPATIAL_RES_
-Spatial resolution (pixel size) to attribute to the re-projected raster
-(usually in meters)
-
-_VERBOSE_
-Print progress messages? If TRUE messages and progress bars will be displayed.
-
-
-### 3.2.3 Outputs
+### 3.2.3 Output
 
 Model outputs will be placed the _OUTPUTS/PROD_MODS_ directory. 
 
