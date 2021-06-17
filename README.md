@@ -135,15 +135,14 @@ The codes use each time steps to solve the equations.
 ![info-icon](https://img.icons8.com/flat_round/48/000000/info.png)
 __NOTE__: Time steps need to be defined in this section.
 
-### 3.2.3 Output
+## 3.2. Output (plots)
 
-Model outputs will be placed the _OUTPUTS/PROD_MODS_ directory. 
+Model outputs will be genrated in different plots such as 
 
-A multiband raster with all species binary projections (0/1, unsuitable/suitable) 
-in files with suffix _SpBinEnvSuit.tif_ and its total overlap in _AllSpBinEnvSuit.tif_.
-
-Also includes model summaries and diagnostics for the log-log annual production model 
-by region.
+         (i) biomass prediction
+         (ii) population ratio
+         (iii) Change in Gas Phase
+         etc. further explanation about the used variable are provided inside the codes.
 
 
 # 4. Contacts
