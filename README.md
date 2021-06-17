@@ -132,6 +132,7 @@ of all gases used in the system
 ## 3.2. Solution of the ODE equations
 
 The codes use each time steps to solve the equations.
+
 ![info-icon](https://img.icons8.com/flat_round/48/000000/info.png)
 __NOTE__: Time steps need to be defined in this section.
 
@@ -139,10 +140,13 @@ __NOTE__: Time steps need to be defined in this section.
 
 Model outputs will be genrated in different plots such as 
 
-         (i) biomass prediction
-         (ii) population ratio
-         (iii) Change in Gas Phase
-         etc. further explanation about the used variable are provided inside the codes.
+(i) biomass prediction
+         
+ (ii) population ratio
+ 
+ (iii) Change in Gas Phase
+ 
+ etc. further explanation about the used variable are provided inside the codes.
 
 
 # 4. Contacts
@@ -150,17 +154,8 @@ Model outputs will be genrated in different plots such as
 If you need assistance using these analysis scripts or to adjust them to your specific aims, 
 do contact us at:
 
-_Salvador Arenas-Castro_: salvadorarenascastro [at] cibio.up.pt
+_Kiumars Badr_: kzb0054 [at] auburn.edu
 
-_João F Gonçalves_: joao.goncalves [at] cibio.up.pt
-# Semi-structured-KineticModel
-*This Kinetic model consist of 4 main Models to run, including the experimental data:
+_Jin Wang_: wang [at] auburn.edu
 
-1-Coculture vs single culture 2-Gas composition 3-Light intensity 4-Inoculum ratio
-
--which all the models use the same function named "functionV7".
-
-*There is an addtional model to test the coculture growth without havind the self shading effect:
-
-Withoutselfshed -which uses "functionWO" to operate.
-Wang group May 2021
+_Wang group Jun 2021_
