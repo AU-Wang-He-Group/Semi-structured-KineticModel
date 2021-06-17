@@ -95,43 +95,45 @@ Further explanation about -Name- of each variable has been provided inside the c
 
 ### 3.1.2. Parameters
 
-_Insert Gas composition_
-initial percentage of each gas component in the system
+- Insert Gas composition:
+ initial percentage of each gas component in the system
 
-_Insert light intensity_
+
+- Insert light intensity:
 light intensity needs to be entered for photoautotroph growth based on (umol photon/m2/s)
 
-_Insert volume of liquid and gas phase (L)_
+- Insert volume of liquid and gas phase (L):
 volume of liquid and gas phase on the bioreactor
 
-_photoautotroph Yields_
+- photoautotroph Yields:
 needed for calculating amount of biomass and _in situ_ gas consumption production rate
 
-_methanotroph yields_
+- methanotroph yields:
 needed for calculating amount of biomass and _in situ_ gas consumption production rate
 
-_Monod parameters_
+- Monod parameters:
 for calculation of the species growth rate 
 
-_time(hours)_
+- time(hours):
 all sample points in the experiment. to give the running time.
 
 ### 3.1.3. Initialization 
 
-_Insert initial individual biomass (inoculation)_
+- Insert initial individual biomass (inoculation):
 concentration of each species in the system (gDCW/L)
 
-_Insert total dissoved inorganic carbon in the liquid (mmol/L)(if any)_
+- Insert total dissoved inorganic carbon in the liquid (mmol/L)(if any): 
 amount of bicarbonate or carbonate salt in the medium
 
-_Henry's constant (M/atm)_
+- Henry's constant (M/atm):
 of all gases used in the system
 
 
 ## 3.2. Solution of the ODE equations
 
 The codes use each time steps to solve the equations.
-- you need to define the time steps in this section.
+![info-icon](https://img.icons8.com/flat_round/48/000000/info.png)
+__NOTE__: Time steps need to be defined in this section.
 
 ### 3.2.3 Output
 
