@@ -50,16 +50,6 @@ __NOTE__: photoautotroph has been specified with Green color and methanotroph wi
       - Optical density (OD 670)
       - Inorganic carbon concentration (IC) (mg/L)
       - Gas area and concentrations using Gas Chromatography (GC) for -Oxygen (O2) -Methane (CH4) -Carbon dioxide (CO2)
-  
-  
-- __Regions__: a raster dataset containing administrative regions
-
-
-   - The table has four columns:
-      - ID: observation identifier	
-      - X: longitude (in decimal degrees)
-      - Y: latitude (in decimal degrees)
-      - NAME: name of the crop species or variety (i.e. olive variety code - see table above)
 
 
 ![warning-icon](https://img.icons8.com/emoji/48/000000/warning-emoji.png)
@@ -83,7 +73,7 @@ _PredictorVariables/Future_.
 
 ![Table1](https://user-images.githubusercontent.com/67964457/122443411-2f786d00-cf65-11eb-9ea3-8d64c39a4b36.jpg)
 
-- __Matlab codes__: The discription of each file and the corresponding experiment are included in the following table:
+- __Matlab codes__: The discription of each file and the corresponding simulation are included in the following table:
 
    |File name                                 |Description                           |
    |------------------------------------------|--------------------------------------|
@@ -96,21 +86,7 @@ _PredictorVariables/Future_.
    |_functionWO_                  |the function used with _WithoutSelfShad_ file     |
    
    
-- If you wish to use your own data start by cleaning each one of the _DATA_ subfolders: 
-_PredictorVariables/Current_, _PredictorVariables/Future_, _ProductivityData_, _Regions_, 
-and, _ResponseVariable_. This way the analysis routines will use your own data and not get 
-it mixed with the example data. Replace by your own data formated as the example data and 
-following the instructions above;
 
-- The main workflow is composed by two scripts that need to be run in sequence:
-
-   1) __SDMcalibrationForecasting-v1.R__ - this will generate the predicitve distribution/suitability 
-   models for all target species/varieties considering current conditions and make spatial projections 
-   for all dates/scenarios (both for current and future conditions);
-
-   2) __FitRegression_SuitableArea_vs_Productivity-v1.R__ - this script will gather model projections 
-   from biomod2 (from step 1), calculate the total area suitable for all species/varities and related 
-   that with annual production data through a log-log model as in Arenas-Castro et al (2020).
 
 
 ## 3.1. How to read the codes
@@ -138,6 +114,10 @@ integer value, the same used as the unique ID in the Total Annual productivity
 table. This is necessary to enable joining the data across these sources. To
 enable area calculations this should be in a projected coordinate system or  (check
 below PROJ_RASTER_DATA and PROJ_COORD_SYSTEM parameter).
+
+![warning-icon](https://img.icons8.com/emoji/48/000000/warning-emoji.png)
+__WARNING__: If you wish to use your own data start by cleaning each one of the variables in _Experimental data_ section in the code: 
+Further explanation about -Name- of each variable has been provided inside the codes.
 
 
 ### 3.1.2. Parameters for running
